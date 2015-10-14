@@ -8,6 +8,9 @@ from flask.ext.moment import Moment
 from flask.ext.wtf import Form
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.migrate import Migrate,MigrateCommand
+from flask.ext.mail import Mail
+from flask.ext.mail import Message
 
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
@@ -24,9 +27,16 @@ app.config['SECRET_KEY'] = 'hard to guess string'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
+app.config['MAIL_SERVER']='smtp.qq.com'
+app.config['MAIL_PORT'] = 25
+app.config['MAIL_USENAME']='497761497@qq.com'
+app.config['MAIL_PASSWORD']='JENKINGwuse*.*'
+
 moment = Moment(app)
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app)
+mail = Mail(app)
 manager = Manager(app)
 
 def trace(msg):
@@ -60,7 +70,7 @@ def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role)
 
 manager.add_command('shell', Shell(make_context=make_shell_context))
-
+manager.add_command('db', MigrateCommand)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -78,6 +88,17 @@ def index():
         return redirect(url_for('index'))
     return render_template('index.html', form=form, name=session.get('name'), known=session.get('known', False))
 
+
+@app.route('/mail', methods=['GET', 'POST'])
+def mailsend():
+    msg=Message('test object',sender='497761497@qq.com',recipients=['taikongfeizhu@163.com'])
+    msg.body='text body'
+    msg.html='<b>HTML</b> body'
+    try:
+        mail.send(msg)
+    except Exception,e:
+        trace(e)
+    return render_template('data.html')
 
 @app.route('/data',methods=['GET','POST'])
 def database():
@@ -127,7 +148,7 @@ def moment():
 
 
 @app.route('/usr/<name>')
-def user(name):
+def usedr(name):
     return render_template('user.html', name=name, user='wong')
 
 
@@ -142,5 +163,6 @@ def internal_server_error(e):
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
+    #app.run(debug=True)
     manager.run()
+

@@ -21,3 +21,7 @@
 ### git push ###
 >1. git remote add origin git@github.com:taikongfeizhu/flask.git
 >1. git push -u origin master
+
+### git rebase ###
+>1. git rebase -i (git rebase --continue , git rebase --abort)
+>1. git pull --rebase
