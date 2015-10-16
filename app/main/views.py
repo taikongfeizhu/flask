@@ -36,4 +36,3 @@ def moment():
 @main.route('/usr/<name>')
 def usedr(name):
     return render_template('user.html', name=name, user='wong')
-
