@@ -1,5 +1,9 @@
 {% extends 'base.html'%}
 {% block title %}User{% endblock %}
+{% block cumstom_css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+
 {% block body %}
     <h2>Hello {{name}}!</h2>
     <ul>
@@ -8,3 +12,8 @@
         {% endfor %}
     </ul>
 {% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static',filename='js/plugin/backbone.localStorage-min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+{% endblock%}
