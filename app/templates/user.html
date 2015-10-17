@@ -2,8 +2,8 @@
 {% block title %}User{% endblock %}
 {% block body %}
     <h2>Hello {{name}}!</h2>
-    <a href="{{ url_for('user',name='wong',_external=True) }}">Link1</a>
-    <a href="{{ url_for('index', page='2') }}">Link2</a>
+    <a href="{{ url_for('main.user',name='wong',_external=True) }}">Link1</a>
+    <a href="{{ url_for('main.index', page='2') }}">Link2</a>
 {% endblock %}
 
 

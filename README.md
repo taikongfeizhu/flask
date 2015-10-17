@@ -1,5 +1,8 @@
 ### run site ###
 >1. python index.py runserver -h 0.0.0.0 -p 3001 -r
+>1. python manage.py db init
+>1. python manage.py db migrate -m 'initial migration'
+>1. python manage.py db upgrade
 
 ### dependencies plugin ###
 >1. flask.ext.script

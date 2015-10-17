@@ -23,16 +23,19 @@ def index():
         else:
             session['known'] = True
         session['name'] = form.name.data
-        return redirect(url_for('.index'))
+        return redirect(url_for('main.index'))
     return render_template('index.html',
                            form=form, name=session.get('name'),
                            known=session.get('known', False))
 
-@main.route('/moment')
+@main.route('/moment/')
 def moment():
-    return render_template('moment.html', mylist=["one", "two", "three", "four", "five"], current_time=datetime.utcnow())
+    return render_template('moment.html', current_time=datetime.utcnow())
 
+@main.route('/test/')
+def test():
+    return render_template('test.html',name='Jenking',mylist=["one", "two", "three", "four", "five"])
 
-@main.route('/usr/<name>')
-def usedr(name):
+@main.route('/user/<name>/')
+def user(name):
     return render_template('user.html', name=name, user='wong')
