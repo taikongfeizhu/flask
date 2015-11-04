@@ -29,13 +29,15 @@ Flask一个基于**python**开发的**轻量级快速开发web框架**,也被称
 * alembic==0.8.2
 * blinker==1.4
 * itsdangerous==0.24
+
+可执行：<code>pip install -r requirements.txt</code>
  
 Check out our [requirements docs](requirements.txt) for more info. 
 
 ## Run site
 1. <code>python index.py runserver -h 0.0.0.0 -p 3001 -r</code>
 2. <code>python manage.py db init</code>
-3. <code>python manage.py db migrate -m 'initial migration</code>
+3. <code>python manage.py db migrate -m 'initial migration'</code>
 4. <code>python manage.py db upgrade</code>
 5. <code>pip freeze > requirements.txt</code>
 
